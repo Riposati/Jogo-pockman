@@ -21,10 +21,20 @@ struct posicao{
     int marcaAchouPersonagem;
 }typedef Posicao;
 
+struct heroi{
+    int qtdVidas;
+    int pontos;
+} typedef Heroi;
+
 MapaPacMan mapasPacMan;
 Posicao posicaoHeroi;
-int qtdVidas = 5;
-int pontos = 0;
+Heroi packman;
+
+void inicializaHeroi(Heroi *heroi){
+
+    heroi->qtdVidas = 5;
+    heroi->pontos=0;
+}
 
 void abreMapa(){
 
@@ -77,9 +87,9 @@ void liberaMapa(){
 
 int fimJogo(){
 
-    if(qtdVidas==0) {
+    if(packman.qtdVidas==0) {
         puts("\n\nGAME OVER!!\n");
-        printf("\aVOCE CONQUISTOU %d pontos, PARABENS!\n\n",pontos);
+        printf("\aVOCE CONQUISTOU %d pontos, PARABENS!\n\n",packman.pontos);
         return 1;
     }
 
@@ -103,7 +113,7 @@ void tiraVidas(int x,int y){
 
     /// ver se tem fantasma perto do pac
     if((mapasPacMan.mapa[y][x+1]=='F') || (mapasPacMan.mapa[y][x-1]=='F')){
-        qtdVidas--;
+        packman.qtdVidas--;
     }
 }
 
@@ -111,22 +121,22 @@ void marcaPontos(int x,int y){
 
             /// ver se o pac consegue pontos
              if((mapasPacMan.mapa[y][x+1]=='*')){
-                pontos +=10;
+                packman.pontos +=10;
                 atualizaMapa(x+1,y);
             }
 
             if((mapasPacMan.mapa[y][x-1]=='*')){
-                pontos +=10;
+                packman.pontos +=10;
                 atualizaMapa(x-1,y);
             }
 
             if((mapasPacMan.mapa[y-1][x]=='*')){
-                pontos +=10;
+                packman.pontos +=10;
                 atualizaMapa(x,y-1);
             }
 
             if((mapasPacMan.mapa[y+1][x]=='*')){
-                pontos +=10;
+                packman.pontos +=10;
                 atualizaMapa(x,y+1);
             }
 }
@@ -267,13 +277,14 @@ void exibeTutorialMovimentacao(){
     puts("Tecla A + enter = Para Esquerda");
     puts("Tecla S + enter = Para Baixo");
     puts("Tecla D + enter = Para Direita\n");
-    printf("SUAS VIDAS ATE O MOMENTO JOGADOR -->>> %d\n",qtdVidas);
+    printf("SUAS VIDAS ATE O MOMENTO JOGADOR -->>> %d\n",packman.qtdVidas);
 }
 
 void main(){
 
     system("color ff");
 
+    inicializaHeroi(&packman);
     abreMapa();
     mostraMapa();
     char movimentoJogador;
