@@ -287,4 +287,5 @@ void main(){
     }while(!fimJogo());
 
     liberaMapa();
+    system("pause");
 }
