@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1454828855 source:c:\users\gurip_000\desktop\jogo_packman\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
