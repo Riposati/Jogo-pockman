@@ -189,6 +189,7 @@ void moveFantasma(){
     int yFantasma;
     int xFantasma;
     int flag=0,i,j;
+    srand(time(0));
     int ondeFantasmaApareceNaProxima = rand() % 5;
 
      for(i=0;i<mapasPacMan.linhas;i++){
