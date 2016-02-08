@@ -7,12 +7,15 @@
 #define PRABAIXO 's'
 #define DIREITA 'd'
 #define HEROI '@'
-#define FANTASMA 'F'
+#define FANTASMA '&'
+#define PILULA '$'
 
 struct mapa{
     char **mapa;
     int linhas;
     int colunas;
+    int quantidadeFrutasMapa;
+
 }typedef MapaPacMan;
 
 struct posicao{
@@ -24,20 +27,104 @@ struct posicao{
 struct heroi{
     int qtdVidas;
     int pontos;
+    int temPilula;
 } typedef Heroi;
 
 MapaPacMan mapasPacMan;
 Posicao posicaoHeroi;
 Heroi packman;
 
+char desenhoparede[4][7] = {
+    {"......" },
+    {"......" },
+    {"......" },
+    {"......" }
+};
+
+char desenhoheroi[4][7] = {
+    {" .--. "  },
+    {"/ _.-'"  },
+    {"\\  '-." },
+    {" '--' "  }
+};
+
+char desenhopilula[4][7] = {
+    {"      "},
+    {" .-.  "},
+    {" '-'  "},
+    {"      "}
+};
+
+char desenhovazio[4][7] = {
+    {"      "},
+    {"      "},
+    {"      "},
+    {"      "}
+};
+
+char desenhofantasma[4][7] = {
+	{" .-.  " },
+	{"| OO| " },
+	{"|   | " },
+	{"'^^^' " }
+};
+
+char desenhofruta[4][7] = {
+	{" .-. " },
+	{" *** " },
+	{" *** " },
+	{"'.-.'" }
+};
+
+void imprimeparte(char desenho[4][7], int parte) {
+    printf("%s", desenho[parte]);
+}
+
+void imprimemapa() {
+    int i,j,parte;
+
+    for(i = 0; i < mapasPacMan.linhas; i++) {
+
+        for(parte = 0; parte < 4; parte++) {
+            for(j = 0; j < mapasPacMan.colunas; j++) {
+
+                switch(mapasPacMan.mapa[i][j]) {
+                    case FANTASMA:
+                        imprimeparte(desenhofantasma, parte);
+                        break;
+                    case HEROI:
+                        imprimeparte(desenhoheroi, parte);
+                        break;
+                    case PILULA:
+                        imprimeparte(desenhopilula, parte);
+                        break;
+                    case '*':
+                        imprimeparte(desenhofruta, parte);
+                        break;
+                    case '|':
+                    case '-':
+                        imprimeparte(desenhoparede, parte);
+                        break;
+                    case '.':
+                        imprimeparte(desenhovazio, parte);
+                        break;
+                }
+
+            }
+            printf("\n");
+        }
+
+    }
+}
+
 void inicializaHeroi(Heroi *heroi){
 
     heroi->qtdVidas = 5;
     heroi->pontos=0;
+    heroi->temPilula = 0;
 }
 
 void abreMapa(){
-
     int i;
     FILE *p;
 
@@ -51,6 +138,7 @@ void abreMapa(){
 
     fscanf(p,"%d",&mapasPacMan.linhas);
     fscanf(p,"%d",&mapasPacMan.colunas);
+    fscanf(p,"%d",&mapasPacMan.quantidadeFrutasMapa);
 
     mapasPacMan.mapa = (char *) malloc(sizeof(char) * mapasPacMan.linhas);
 
@@ -91,6 +179,10 @@ int fimJogo(){
         puts("\n\nGAME OVER!!\n");
         printf("\aVOCE CONQUISTOU %d pontos, PARABENS!\n\n",packman.pontos);
         return 1;
+    }else if(mapasPacMan.quantidadeFrutasMapa == 0){
+        puts("\n\nVITORIA!\n");
+        printf("\aVOCE CONQUISTOU %d pontos, PARABENS!\n\n",packman.pontos);
+        return 1;
     }
 
     else return 0;
@@ -112,9 +204,14 @@ void atualizaMapa(int x,int y){
 void tiraVidas(int x,int y){
 
     /// ver se tem fantasma perto do pac
-    if((mapasPacMan.mapa[y][x+1]=='F') || (mapasPacMan.mapa[y][x-1]=='F')){
+    if((mapasPacMan.mapa[y][x+1]==FANTASMA) || (mapasPacMan.mapa[y][x-1]==FANTASMA)){
         packman.qtdVidas--;
     }
+}
+
+void tiraFrutaMapa(){
+
+    mapasPacMan.quantidadeFrutasMapa--;
 }
 
 void marcaPontos(int x,int y){
@@ -123,21 +220,25 @@ void marcaPontos(int x,int y){
              if((mapasPacMan.mapa[y][x+1]=='*')){
                 packman.pontos +=10;
                 atualizaMapa(x+1,y);
+                tiraFrutaMapa();
             }
 
             if((mapasPacMan.mapa[y][x-1]=='*')){
                 packman.pontos +=10;
                 atualizaMapa(x-1,y);
+                tiraFrutaMapa();
             }
 
             if((mapasPacMan.mapa[y-1][x]=='*')){
                 packman.pontos +=10;
                 atualizaMapa(x,y-1);
+                tiraFrutaMapa();
             }
 
             if((mapasPacMan.mapa[y+1][x]=='*')){
                 packman.pontos +=10;
                 atualizaMapa(x,y+1);
+                tiraFrutaMapa();
             }
 }
 
@@ -200,7 +301,7 @@ void moveFantasma(){
     int xFantasma;
     int flag=0,i,j;
     srand(time(0));
-    int ondeFantasmaApareceNaProxima = rand() % 5;
+    int ondeFantasmaApareceNaProxima = rand() % 9;
 
      for(i=0;i<mapasPacMan.linhas;i++){
 
@@ -265,28 +366,74 @@ void movePacMan(char tecla){
 
     switchMovimentacao(tecla,x,y);
     moveFantasma();
+    comeFantasma(x,y);
+    pegaPilula(x,y);
 }
 
 void exibeTutorialMovimentacao(){
-    puts("\nCOMO JOGAR:\n");
-    puts("\n@ - PACKMAN (VOCE)\n");
-    puts("F - FANTASMAS\n");
-    puts("* - FRUTAS COM PONTOS\n");
+
+    puts("\nCOMO JOGAR:");
+    /*puts("@ - PACKMAN (VOCE)");
+    puts("& - FANTASMAS");
+    puts("* - FRUTAS COM PONTOS");
+    puts("$ - BOMBAS");*/
 
     puts("Tecla W + enter = Para Cima");
     puts("Tecla A + enter = Para Esquerda");
     puts("Tecla S + enter = Para Baixo");
     puts("Tecla D + enter = Para Direita\n");
-    printf("SUAS VIDAS ATE O MOMENTO JOGADOR -->>> %d\n",packman.qtdVidas);
+    printf("\nSUAS VIDAS ATE O MOMENTO JOGADOR -->>> %d\n",packman.qtdVidas);
+    printf("\nVOCE TEM BOMBA -->>> %s\n\n",packman.temPilula ? "SIM" : "NAO");
+}
+
+void pegaPilula(int x,int y){
+
+    if(mapasPacMan.mapa[y][x-1] ==PILULA){
+        mapasPacMan.mapa[y][x-1] = '.';
+        packman.temPilula = 1;
+    }
+
+    else if(mapasPacMan.mapa[y][x+1] ==PILULA){
+        mapasPacMan.mapa[y][x+1] = '.';
+        packman.temPilula = 1;
+    }
+
+    else if(mapasPacMan.mapa[y-1][x] ==PILULA){
+        mapasPacMan.mapa[y-1][x] = '.';
+        packman.temPilula = 1;
+    }
+
+    else if(mapasPacMan.mapa[y+1][x] ==PILULA){
+        mapasPacMan.mapa[y+1][x] = '.';
+        packman.temPilula = 1;
+    }
+}
+
+void comeFantasma(int x,int y){
+
+    if(packman.temPilula!=1)return;
+
+    /// ver se tem fantasma perto do pac
+    if((mapasPacMan.mapa[y][x+1]==FANTASMA)){
+        mapasPacMan.mapa[y][x+1] = '.';
+        packman.temPilula = 0;
+        packman.pontos +=5;
+    }
+
+    else if(mapasPacMan.mapa[y][x-1]==FANTASMA){
+        mapasPacMan.mapa[y][x-1] = '.';
+        packman.temPilula = 0;
+        packman.pontos +=5;
+    }
 }
 
 void main(){
 
-    system("color ff");
+    //system("color ff");
 
     inicializaHeroi(&packman);
     abreMapa();
-    mostraMapa();
+    imprimemapa();
     char movimentoJogador;
 
     do{
@@ -294,10 +441,12 @@ void main(){
       exibeTutorialMovimentacao();
       scanf(" %c",&movimentoJogador);
       movePacMan(movimentoJogador);
-      mostraMapa();
+      imprimemapa();
 
     }while(!fimJogo());
 
     liberaMapa();
+
+    scanf("");
     system("pause");
 }
