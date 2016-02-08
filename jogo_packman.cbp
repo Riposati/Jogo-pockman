@@ -31,7 +31,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="headers_mapa/header_heroi.h" />
+		<Unit filename="headers_mapa/header_mapa.h" />
+		<Unit filename="headers_mapa/header_tutorial.h" />
+		<Unit filename="heroi.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mapa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tutorial.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
