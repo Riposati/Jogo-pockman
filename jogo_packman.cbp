@@ -31,9 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="headers_mapa/header_heroi.h" />
-		<Unit filename="headers_mapa/header_mapa.h" />
-		<Unit filename="headers_mapa/header_tutorial.h" />
+		<Unit filename="headers_packman/header_heroi.h" />
+		<Unit filename="headers_packman/header_mapa.h" />
+		<Unit filename="headers_packman/header_tutorial.h" />
 		<Unit filename="heroi.c">
 			<Option compilerVar="CC" />
 		</Unit>
