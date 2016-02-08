@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1454959596 source:c:\users\gurip_000\desktop\jogo_packman\main.c
+1454959794 source:c:\users\gurip_000\desktop\jogo_packman\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
