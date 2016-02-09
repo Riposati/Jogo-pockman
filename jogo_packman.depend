@@ -1,42 +1,49 @@
 # depslib dependency file v1.0
-1454972248 source:c:\users\gurip_000\desktop\jogo_packman\main.c
+1455043240 source:c:\users\gurip_000\desktop\jogo_packman\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
-	"headers_mapa/header_heroi.h"
-	"headers_mapa/header_mapa.h"
-	"headers_mapa/header_tutorial.h"
+	"headers_packman/header_heroi.h"
+	"headers_packman/header_mapa.h"
+	"headers_packman/header_tutorial.h"
 
 1454966028 c:\users\gurip_000\desktop\jogo_packman\header_mapa.h
 
-1454972273 source:c:\users\gurip_000\desktop\jogo_packman\mapa.c
+1455041476 source:c:\users\gurip_000\desktop\jogo_packman\mapa.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
-	"headers_mapa/header_heroi.h"
-	"headers_mapa/header_mapa.h"
-	"headers_mapa/header_tutorial.h"
+	"headers_packman/header_heroi.h"
+	"headers_packman/header_mapa.h"
+	"headers_packman/header_tutorial.h"
 
 1454966622 c:\users\gurip_000\desktop\jogo_packman\headers_mapa\header_mapa.h
 
-1454972265 source:c:\users\gurip_000\desktop\jogo_packman\heroi.c
+1455043369 source:c:\users\gurip_000\desktop\jogo_packman\heroi.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
-	"headers_mapa/header_heroi.h"
-	"headers_mapa/header_mapa.h"
-	"headers_mapa/header_tutorial.h"
+	"headers_packman/header_heroi.h"
+	"headers_packman/header_mapa.h"
+	"headers_packman/header_tutorial.h"
 
 1454971661 c:\users\gurip_000\desktop\jogo_packman\headers_mapa\header_heroi.h
 	"header_mapa.h"
 
 1454971941 c:\users\gurip_000\desktop\jogo_packman\headers_mapa\header_tutorial.h
 
-1454972277 source:c:\users\gurip_000\desktop\jogo_packman\tutorial.c
+1455041480 source:c:\users\gurip_000\desktop\jogo_packman\tutorial.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
-	"headers_mapa/header_heroi.h"
-	"headers_mapa/header_mapa.h"
-	"headers_mapa/header_tutorial.h"
+	"headers_packman/header_heroi.h"
+	"headers_packman/header_mapa.h"
+	"headers_packman/header_tutorial.h"
+
+1455043283 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_heroi.h
+	"header_mapa.h"
+
+1454966622 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_mapa.h
+
+1454971941 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_tutorial.h
 

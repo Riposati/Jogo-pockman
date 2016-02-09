@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 #ifndef _header_heroi _header_mapa _header_tuto
 
     #define _header_heroi
-    #include "headers_mapa/header_heroi.h"
+    #include "headers_packman/header_heroi.h"
 
     #define _header_mapa
-    #include "headers_mapa/header_mapa.h"
+    #include "headers_packman/header_mapa.h"
 
     #define _header_tuto
-    #include "headers_mapa/header_tutorial.h"
+    #include "headers_packman/header_tutorial.h"
 #endif
+
 
 char desenhoparede[4][7] = {
     {"......" },
