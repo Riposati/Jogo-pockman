@@ -125,21 +125,12 @@ void movePacMan(Posicao *posicaoHeroi , MapaPacMan *mapasPacMan , Heroi *packman
     // x é a abscissa
 
     switchMovimentacao(posicaoHeroi, mapasPacMan , packman ,&tecla,x,y);
-
-    printf("Posicao pack eixo x = %d \n",posicaoHeroi->x);
-    printf("Posicao pack eixo y = %d \n",posicaoHeroi->y);
-
     moveFantasma(mapasPacMan);
     comeFantasma(packman,mapasPacMan,x,y);
     pegaPilula(packman,mapasPacMan,x,y);
 }
 
 void switchMovimentacao(Posicao *posicaoHeroi , MapaPacMan *mapasPacMan , Heroi *packman ,char *tecla, int x, int y){
-
-
-        printf("tecla digitada = %c\n",*tecla);
-        printf("Posicao pack eixo x = %d \n",posicaoHeroi->x);
-        printf("Posicao pack eixo y = %d \n",posicaoHeroi->y);
 
         switch(*tecla){
 
