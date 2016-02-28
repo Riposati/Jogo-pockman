@@ -55,22 +55,22 @@ void tiraVidas(Heroi *packman,MapaPacMan *mapasPacMan,int x,int y){
 void pegaPilula(Heroi *packman,MapaPacMan *mapasPacMan,int x,int y){
 
     if(mapasPacMan->mapa[y][x-1] ==PILULA){
-        mapasPacMan->mapa[y][x-1] = '.';
+        atualizaMapa(mapasPacMan,x-1,y);
         packman->temPilula = 1;
     }
 
     else if(mapasPacMan->mapa[y][x+1] ==PILULA){
-        mapasPacMan->mapa[y][x+1] = '.';
+        atualizaMapa(mapasPacMan,x+1,y);
         packman->temPilula = 1;
     }
 
     else if(mapasPacMan->mapa[y-1][x] ==PILULA){
-        mapasPacMan->mapa[y-1][x] = '.';
+        atualizaMapa(mapasPacMan,x,y-1);
         packman->temPilula = 1;
     }
 
     else if(mapasPacMan->mapa[y+1][x] ==PILULA){
-        mapasPacMan->mapa[y+1][x] = '.';
+        atualizaMapa(mapasPacMan,x,y+1);
         packman->temPilula = 1;
     }
 }
@@ -81,13 +81,13 @@ void comeFantasma(Heroi *packman,MapaPacMan *mapasPacMan,int x,int y){
 
     /// ver se tem fantasma perto do pac
     if((mapasPacMan->mapa[y][x+1]==FANTASMA)){
-        mapasPacMan->mapa[y][x+1] = '.';
+        atualizaMapa(mapasPacMan,x+1,y);
         packman->temPilula = 0;
         packman->pontos +=5;
     }
 
     else if(mapasPacMan->mapa[y][x-1]==FANTASMA){
-        mapasPacMan->mapa[y][x-1] = '.';
+        atualizaMapa(mapasPacMan,x-1,y);
         packman->temPilula = 0;
         packman->pontos +=5;
     }

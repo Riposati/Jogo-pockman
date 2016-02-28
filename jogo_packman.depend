@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1455043240 source:c:\users\gurip_000\desktop\jogo_packman\main.c
+1455039640 source:c:\users\gurip_000\desktop\jogo_packman\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -9,7 +9,7 @@
 
 1454966028 c:\users\gurip_000\desktop\jogo_packman\header_mapa.h
 
-1455041476 source:c:\users\gurip_000\desktop\jogo_packman\mapa.c
+1455037876 source:c:\users\gurip_000\desktop\jogo_packman\mapa.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -32,7 +32,7 @@
 
 1454971941 c:\users\gurip_000\desktop\jogo_packman\headers_mapa\header_tutorial.h
 
-1455041480 source:c:\users\gurip_000\desktop\jogo_packman\tutorial.c
+1455037880 source:c:\users\gurip_000\desktop\jogo_packman\tutorial.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -40,10 +40,10 @@
 	"headers_packman/header_mapa.h"
 	"headers_packman/header_tutorial.h"
 
-1455043283 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_heroi.h
+1455039683 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_heroi.h
 	"header_mapa.h"
 
-1454966622 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_mapa.h
+1454963022 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_mapa.h
 
-1454971941 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_tutorial.h
+1454968341 c:\users\gurip_000\desktop\jogo_packman\headers_packman\header_tutorial.h
 
